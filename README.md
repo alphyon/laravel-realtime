@@ -45,7 +45,7 @@ configures in  the main layout of our project specific add in the `resources/vie
 - add components of type Event in the backend use this command `php artisan make:event {event component name}` 
   if the command run the first time automatically created a new folder with name `Events` in the app with an archive with name pass in the command
   in this file we have the next code
-```injectablephp
+```php
     class UserSessionChange implements ShouldBroadcast
     {
         use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -81,7 +81,7 @@ configures in  the main layout of our project specific add in the `resources/vie
 
 
  - register a new listeners in the file locate in `app/Providers/EventServiceProvider.php`
-```injectablephp
+```php
 protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
@@ -112,7 +112,7 @@ Echo.channel('notifications')
 ### Broadcast in private channel 
 
 - change the type of channel on the method `broadCastOn` into the file `app/Events/UserSessionChange.php`
-```injectablephp
+```php
 public function broadcastOn()
     {
         return new PrivateChannel('notifications');
@@ -127,7 +127,7 @@ Echo.private('notifications')
 ```
 
 - and in the file `routes/channels.php` add a new route
-``` injectablephp 
+``` php 
 Broadcast::channel('notifications', function ($user) {
 return $user != null;
 });
